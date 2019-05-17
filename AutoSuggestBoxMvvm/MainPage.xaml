@@ -5,10 +5,41 @@
     xmlns:local="using:AutoSuggestBoxMvvm"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModel="using:AutoSuggestBoxMvvm.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.DataContext>
+            <viewModel:PersonVm/>
+        </Grid.DataContext>
+        <AutoSuggestBox x:Name="AutoSuggestBox" 
+                        PlaceholderText="Search By Keywords"
+                        QueryIcon="Find"
+                        ItemsSource="{Binding Patients,Mode=TwoWay}"
+                        HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="117,170,0,0" Width="500" >
+            <AutoSuggestBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding Id , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged }"/>
+                        <Run Text="{Binding Name , Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                    </TextBlock>
+                </DataTemplate>
+            </AutoSuggestBox.ItemTemplate>
 
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="QuerySubmitted">
+                    <core:EventTriggerBehavior.Actions>
+                        <core:InvokeCommandAction Command="{Binding SuggessionSelectPatientQuerySubmitted}"/>
+                    </core:EventTriggerBehavior.Actions>
+                </core:EventTriggerBehavior>
+
+            </interactivity:Interaction.Behaviors>
+
+
+        </AutoSuggestBox>
+        <TextBlock HorizontalAlignment="Left" Margin="130,270,0,0" Text="{Binding DisplayChosenText , Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
     </Grid>
 </Page>

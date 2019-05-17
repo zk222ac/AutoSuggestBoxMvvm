@@ -119,10 +119,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Catalog\PatientCatalog.cs" />
+    <Compile Include="Command\RelayCommandArgs.cs" />
+    <Compile Include="Common\NotifyChangeProperty.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Patient.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\PersonVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -154,7 +160,11 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.3</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
